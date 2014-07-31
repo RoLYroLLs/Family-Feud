@@ -2,7 +2,10 @@
   background-color: #FFD33E;
   font-family: Helvetica, Arial;
   text-align: center;
-  width:100%;
+}
+
+a {
+    color: #fff;
 }
 
 section {
@@ -113,8 +116,14 @@ figure {
 }
 
 .next {
+    display: none;
+}
+
+.next,
+.start {
   float: right;
   padding-right: 15px;
+  cursor: pointer;
 }
 
 .score {
@@ -157,7 +166,7 @@ figure {
   width: 90%;
 }
 
-#rotating-answers {
+#answers {
   display: table-cell;
   margin: auto;
   text-align: center;
@@ -179,20 +188,48 @@ figure {
   width: 150px;
 }
 
-#wrong {
+#score-teams {
+    position: relative;
+}
+
+#score-team1,
+#score-team2 {
+  background-color: black;
+  border: #FFD33E solid 3px;
+  color: #f0f060;
+  font-family: "Courier New", Courier, monospace; 
+  font-size: 50px;
+  height: 55px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -70px;
+  padding-right: 6px;
+  text-align: right;
+  width: 100px;
+}
+
+#score-team1 {
+  float: left;
+}
+
+#score-team2 {
+  float: right;
+}
+
+.wrong {
   position: fixed;
   text-align: center;
-  top: 33%;
+  top: 30%;
   width: 90%;
   z-index: 1;
 }
 
-#wrong span {
-  background-color: white;
-  border: 8px solid #C13237;
+.wrong span {
+  border: 40px solid #C13237;
   color: #C13237;
-  font-size: 190px;
+  font-size: 250px;
   height: 30%;
   margin: 10px;
   width: 200px;
+  font-weight: bold;
 }

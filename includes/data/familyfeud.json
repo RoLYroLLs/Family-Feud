@@ -1,0 +1,92 @@
+﻿[
+	{
+		"questionID":1
+		,"question":"Question 1?"
+		,"answers":[
+			{
+				"answerid":1
+				,"answer":"Answer 1"
+				,"points":75
+			}
+			,{
+				"answerid":2
+				,"answer":"Answer 2"
+				,"points":25
+			}
+		]
+	}
+	,{
+		"questionID":2
+		,"question":"Question 2?"
+		,"answers":[
+			{
+				"answerid":1
+				,"answer":"Answer 1"
+				,"points":65
+			}
+			,{
+				"answerid":2
+				,"answer":"Answer 2"
+				,"points":20
+			}
+			,{
+				"answerid":3
+				,"answer":"Answer 3"
+				,"points":13
+			}
+			,{
+				"answerid":4
+				,"answer":"Answer 4"
+				,"points":2
+			}
+		]
+	}
+	,{
+		"questionID":3
+		,"question":"Question 3?"
+		,"answers":[
+			{
+				"answerid":1
+				,"answer":"Answer 1"
+				,"points":99
+			}
+			,{
+				"answerid":2
+				,"answer":"Answer 2"
+				,"points":1
+			}
+		]
+	}
+	,{
+		"questionID":4
+		,"question":"Question 4?"
+		,"answers":[
+			{
+				"answerid":1
+				,"answer":"Answer 1"
+				,"points":63
+			}
+			,{
+				"answerid":2
+				,"answer":"Answer 2"
+				,"points":37
+			}
+		]
+	}
+	,{
+		"questionID":5
+		,"question":"Question 5?"
+		,"answers":[
+			{
+				"answerid":1
+				,"answer":"Answer 1"
+				,"points":51
+			}
+			,{
+				"answerid":2
+				,"answer":"Answer 2"
+				,"points":49
+			}
+		]
+	}
+]
