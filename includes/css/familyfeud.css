@@ -159,8 +159,8 @@ figure {
   height: 90%;
   margin-right: auto;
   margin-left: auto;
-  min-width: 1024px;
-  min-height: 600px;
+  min-width: 640px;
+  min-height: 480px;
   position: relative;
   text-align: center;
   width: 90%;
@@ -232,4 +232,31 @@ figure {
   margin: 10px;
   width: 200px;
   font-weight: bold;
+}
+
+#winner {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.70);
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 30px;
+    font-size: 150px;
+    font-weight: bold;
+    color: #f0f060;
+    padding-top: 5%;
+    min-width: 640px;
+    display: none;
+}
+
+#winner .winner-title {
+    color: rgb(0, 255, 0);
+}
+
+#winner .team-name {
+    color: #fff;
+}
+
+#winner .team-score {
+    color: #fff;
 }

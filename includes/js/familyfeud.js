@@ -1,8 +1,7 @@
 ﻿;
 
 $(document).ready(function () {
-    var ifr = document.getElementById('sound'),
-        $answers = $('#answers'),
+    var $answers = $('#answers'),
         $answerContainers = $answers.find('section.container'),
         $strike = $('#strike'),
         $strikeSingle = $('#strike-single'),
@@ -14,14 +13,14 @@ $(document).ready(function () {
         $wrongSingle = $('.wrong-single'),
         $wrong = $('.wrong-multiple'),
         $next = $('.next'),
-        $start = $('.start');
+        $start = $('.start'),
+        $winner = $('#winner');
 
     var templateInactive = $('#template-inactive').html(),
-        templateActive = $('#template-active').html();
+        templateActive = $('#template-active').html(),
+        templateGameEnd = $('#template-winner').html();
 
     var sum = 0,
-        scoreTeam1 = 0,
-        scoreTeam2 = 0,
         strikeCount = 0,
         gameStart = false,
         gameEnd = false,
@@ -29,21 +28,40 @@ $(document).ready(function () {
         questions = [];
 
     var Sounds = {
-        Theme: { value: 1, name: 'Theme', audio: '/includes/audio/familyfeudtheme.mp3' },
-        Bell: { value: 2, name: 'Bell', audio: '/includes/audio/ff-clang.wav' },
-        Buzzer: { value: 3, name: 'Buzzer', audio: '/includes/audio/buzzer.mp3' },
-        Stop: { value: 4, name: 'Stop', audio: '' }
+        Theme: { value: 1, name: 'Theme', audio: '#sounds #theme' },
+        Bell: { value: 2, name: 'Bell', audio: '#sounds #bell' },
+        Buzzer: { value: 3, name: 'Buzzer', audio: '#sounds #buzzer' }
     };
     var Teams = {
-        Team1: { value: 1, name: 'Team 1' },
-        Team2: { value: 2, name: 'Team 2' }
+        Team1: { value: 1, name: 'Team 1', score: 0 },
+        Team2: { value: 2, name: 'Team 2', score: 0 }
     };
 
     /* play sounds */
     var playSound = function (o) {
         if (typeof o !== 'undefined' && typeof o.audio !== 'undefined') {
-            ifr.src = o.audio;
+            $(o.audio)[0].play();
         }
+    };
+    /* lower theme volume */
+    var lowerTheme = function (o) {
+        var volumeFadeOut = setInterval(function () {
+            if ($(Sounds.Theme.audio)[0].volume > 0.05) {
+                $(Sounds.Theme.audio)[0].volume = $(Sounds.Theme.audio)[0].volume - 0.05;
+            } else {
+                clearInterval(volumeFadeOut);
+            }
+        }, 200);
+    };
+    /* raise theme volume */
+    var raiseTheme = function (o) {
+        var volumeFadeIn = setInterval(function () {
+            if ($(Sounds.Theme.audio)[0].volume < 1.00) {
+                $(Sounds.Theme.audio)[0].volume = $(Sounds.Theme.audio)[0].volume + 0.05;
+            } else {
+                clearInterval(volumeFadeIn);
+            }
+        }, 200);
     };
     /* clear the board */
     var clearBoard = function () {
@@ -106,10 +124,10 @@ $(document).ready(function () {
     };
     /* resetTeamScores */
     var resetTeamScores = function (o) {
-        score1 = 0;
-        score2 = 0;
-        sumTeamScores({ team: Teams.Team1, score: score1 });
-        sumTeamScores({ team: Teams.Team2, score: score2 });
+        Teams.Team1.score = 0;
+        Teams.Team2.score = 0;
+        sumTeamScores({ team: Teams.Team1, score: Teams.Team1.score });
+        sumTeamScores({ team: Teams.Team2, score: Teams.Team2.score });
     };
     /* reset strike */
     var resetStrikes = function (o) {
@@ -150,7 +168,7 @@ $(document).ready(function () {
             }
         }
     };
-    /* setup game */
+    /* loadNewAnswers */
     var loadNewAnswers = function (o) {
         console.log('next question');
 
@@ -180,15 +198,17 @@ $(document).ready(function () {
         console.log('startGame');
         
         gameStart = true;
+        gameEnd = false;
 
         resetTeamScores();
+        $winner.hide();
 
         question = 0;
         loadNextQuestion();
         $start.hide();
         $next.show();
 
-        playSound(Sounds.Stop);
+        lowerTheme();
     };
     /* end game */
     var endGame = function () {
@@ -197,14 +217,15 @@ $(document).ready(function () {
         gameEnd = true;
         clearBoard();
 
+        var winner = Teams.Team2.score > Teams.Team1.score ? Teams.Team2 : Teams.Team1;
+
+
+        $winner.html(templateGameEnd.replace(/@TEAMNAME/g, winner.name).replace(/@SCORE/g, winner.score)).show();
+
         $start.show();
         $next.hide();
 
-        playSound(Sounds.Theme);
-    };
-    /* setup game */
-    var setupGame = function () {
-        console.log(questions);
+        raiseTheme();
     };
     /* sum scores */
     var sumScores = function (score) {
@@ -214,14 +235,11 @@ $(document).ready(function () {
     /* sum scores */
     var sumTeamScores = function (o) {
         if (typeof o !== 'undefined' && typeof o.score !== 'undefined' && typeof o.team !== 'undefined') {
-            if (o.team == Teams.Team1) {
-                score1 += o.score
-                $score1.text(score1);
-            } else if (o.team == Teams.Team2) {
-                score2 += o.score
-                $score2.text(score2);
-            }
+            o.team.score += o.score;
         }
+
+        $score1.text(Teams.Team1.score);
+        $score2.text(Teams.Team2.score);
     };
     /* start listeners */
     var startListeners = function () {
@@ -267,9 +285,8 @@ $(document).ready(function () {
         loadAnswers(function () {
             /* done */
             if (typeof questions !== 'undefined' && questions.length > 0) {
-                playSound(Sounds.Theme);
+                console.log(questions);
 
-                setupGame();
                 startListeners();
             } else {
                 playSound(Sounds.Buzzer);
