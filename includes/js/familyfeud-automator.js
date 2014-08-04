@@ -31,7 +31,7 @@ $(document).ready(function () {
         /* answer 1 */
         function () { $($answers.find('section.container.active')[0]).trigger('click'); },
         /* team 1 scores */
-        function () { $score1.trigger('click'); },
+        function () { $score2.trigger('click'); },
         /* next question */
         function () { $next.trigger('click'); },
         /********************************************************
@@ -48,7 +48,7 @@ $(document).ready(function () {
         /* answer 1 */
         function () { $($answers.find('section.container.active')[0]).trigger('click'); },
         /* team 1 scores */
-        function () { $score1.trigger('click'); },
+        function () { $score2.trigger('click'); },
         /* next question */
         function () { $next.trigger('click'); },
         /********************************************************
@@ -67,7 +67,7 @@ $(document).ready(function () {
         /* answer 2 */
         function () { $($answers.find('section.container.active')[1]).trigger('click'); },
         /* team 1 scores */
-        function () { $score1.trigger('click'); },
+        function () { $score2.trigger('click'); },
         /* next question */
         function () { $next.trigger('click'); },
         /********************************************************
@@ -84,7 +84,7 @@ $(document).ready(function () {
         /* answer 2 */
         function () { $($answers.find('section.container.active')[1]).trigger('click'); },
         /* team 1 scores */
-        function () { $score1.trigger('click'); },
+        function () { $score2.trigger('click'); },
         /* next question */
         function () { $next.trigger('click'); },
         /********************************************************
@@ -103,7 +103,7 @@ $(document).ready(function () {
         /* answer 2 */
         function () { $($answers.find('section.container.active')[1]).trigger('click'); },
         /* team 1 scores */
-        function () { $score1.trigger('click'); },
+        function () { $score2.trigger('click'); },
             /* next question */
         function () { $next.trigger('click'); }
     ];
